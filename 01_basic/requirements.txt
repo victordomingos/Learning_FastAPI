@@ -1,2 +1,6 @@
 fastapi
 uvicorn
+cachetools
+requests
+bleach
+beautifulsoup4
