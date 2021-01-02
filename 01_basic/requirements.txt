@@ -4,3 +4,5 @@ cachetools
 requests
 bleach
 beautifulsoup4
+httpx
+jinja2

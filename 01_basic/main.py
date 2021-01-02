@@ -6,24 +6,17 @@ import uvicorn
 from bs4 import BeautifulSoup
 from cachetools import cached, TTLCache
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.responses import JSONResponse
+from starlette.requests import Request
+from starlette.templating import Jinja2Templates
 
 api = FastAPI()
+templates = Jinja2Templates('templates')
 
 
 @api.get('/')
-def index():
-    body = """
-    <html>
-      <body>
-        <h1>Welcome to this API</h1>
-        <div>
-          Try it now: <a href="/api/calculate?x=230&y=327&z=1327">/api/calculate?x=230&y=327&z=1327</a>
-        </div>
-      </body>
-    </html>
-    """
-    return HTMLResponse(content=body)
+def index(request: Request):
+    return templates.TemplateResponse('index.html', {'request': request})
 
 
 @api.get('/api/calculate')
