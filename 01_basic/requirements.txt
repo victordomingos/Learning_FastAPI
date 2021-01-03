@@ -1,9 +1,12 @@
-aiofiles
-fastapi
 uvicorn
+fastapi
 cachetools
 requests
 bleach
 beautifulsoup4
 httpx
+aiofiles
 jinja2
+python-multipart
+python-magic-bin
+Pillow
