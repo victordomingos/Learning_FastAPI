@@ -10,7 +10,9 @@ from models.validation_error import ValidationError
 api_key: Optional[str] = None
 
 
-async def get_report(city: str, country: str, units: str) -> dict:
+async def get_report(city: str, country: str = 'pt', units: str = 'metric') -> dict:
+    validate_units(units)
+
     if forecast := get_weather(city, country, units):
         return forecast
 
@@ -26,3 +28,9 @@ async def get_report(city: str, country: str, units: str) -> dict:
     forecast = data['main']
     weather_cache.set_weather(city, country, units, forecast)
     return forecast
+
+
+def validate_units(units: str):
+    if units not in ('metric', 'imperial', 'standard'):
+        raise ValidationError(error_msg=f'"{units}" is not a valid unit system.',
+                              status_code=404)
