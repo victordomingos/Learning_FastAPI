@@ -33,4 +33,4 @@ async def get_report(city: str, country: str = 'pt', units: str = 'metric') -> d
 def validate_units(units: str):
     if units not in ('metric', 'imperial', 'standard'):
         raise ValidationError(error_msg=f'"{units}" is not a valid unit system.',
-                              status_code=404)
+                              status_code=400)
