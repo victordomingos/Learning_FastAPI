@@ -18,5 +18,9 @@ async def weather(location: Location = Depends(), units: Optional[str] = 'metric
     """
     try:
         return await get_report(location.city, location.country, units)
-    except ValidationError as ex:
-        return fastapi.Response(content=ex.error_msg, status_code=ex.status_code)
+    except ValidationError as ve:
+        return fastapi.Response(content=ve.error_msg, status_code=ve.status_code)
+    except Exception as e:
+        print(e)  # log this instead…
+        return fastapi.Response(content='Error while procession the request',
+                                status_code=500)
