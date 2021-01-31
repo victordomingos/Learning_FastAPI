@@ -35,7 +35,7 @@ async def reports_get() -> List[Report]:
     return await report_service.get_reports()
 
 
-@router.post('/api/reports', name="add_report")
+@router.post('/api/reports', name="add_report", status_code=201)
 async def reports_post(report_to_submit: ReportSubmital) -> Report:
     # await report_service.add_report('A', Location(city='Braga'))  # fake data
     # await report_service.add_report('A', Location(city='New York', country='US'))
